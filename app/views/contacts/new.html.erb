@@ -2,13 +2,11 @@
 
 
 <%= form_for :contact, url: contacts_path do |f| %>
-  <p>
+  <p class="danger">
     <% if @contact && @contact.errors.any? %>
-    <ul>
       <% @contact.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+         <span><%= msg %>&comma;&nbsp;</span>
       <% end %>
-    </ul>
   <% end %>
   </p>
 
