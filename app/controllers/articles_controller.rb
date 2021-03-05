@@ -1,4 +1,14 @@
 class ArticlesController < ApplicationController
+  def blank?
+    !self.attributes.find do |key, value|
+      case (key)
+        when 'id', 'created_at', 'updated_at'
+          false
+      else
+        value.present?
+      end
+    end
+  end
   def index
     @articles = Article.all
   end
