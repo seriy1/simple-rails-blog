@@ -1,4 +1,36 @@
 
-<h1><%= @article.title %></h1>
+<h1>Article</h1>
+<hr>
+<h2><%= @article.title %></h2>
 <p><%= @article.text %></p>
+
+<% @comments = @article.comments %>
+<h2 style="font-style: italic">Comments</h2>
+<hr>
+<%= 'No comments' if @article.comments.empty?  %>
+<% @comments.each do |comment| %>
+  <span style="font-size: x-large; font-weight: bold">
+    <%= comment.author %>
+  </span>
+  <span><i>said:</i></span>
+   <p>
+    <%= comment.body %>
+  </p>
+<% end %>
+<h2 style="font-style: italic">Add Comment</h2>
+<hr>
+<%= form_for ([@article, @comments.build]) do |f| %>
+  <p>
+    <%= f.label :author %> <br/>
+    <%= f.text_field :author %>
+  </p>
+  <p>
+    <%= f.label :body %><br/>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit 'Add Comments'%>
+  </p>
+<% end %>
+<hr/>
 <%= link_to 'All Articles', articles_path %>
